@@ -1,0 +1,16 @@
+name = "MesCore"
+uuid = "0da6f6f1-6857-4856-ba89-6a679ab95268"
+authors = ["Tarn Yeong Ching <i@ctarn.io>"]
+version = "0.0.0"
+
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
