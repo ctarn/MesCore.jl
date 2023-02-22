@@ -56,30 +56,6 @@ parse_range(::Type{T}, s::AbstractString) where T = begin
     end
 end
 
-merge_peaks(peaks, ε) = begin
-    ans = empty(peaks)
-    if isempty(peaks)
-        return ans
-    end
-    mz, inten, weight = peaks[begin].mz, peaks[begin].inten, peaks[begin].inten
-    for p in peaks[begin+1:end]
-        if in_moe(p.mz, mz, ε)
-            mz = (mz * weight + p.mz * p.inten) / (weight + p.inten)
-            inten = max(inten, p.inten)
-            weight += p.inten
-        else
-            push!(ans, Peak(mz, inten))
-            mz, inten, weight = p.mz, p.inten, p.inten
-        end
-    end
-    push!(ans, Peak(mz, inten))
-    return ans
-end
-
-max_inten(ps, lower, upper) = maximum(p -> p.inten, query(ps, lower, upper); init=0.0)
-max_inten_ε(ps, x, ε) = maximum(p -> p.inten, query_ε(ps, x, ε); init=0.0)
-max_inten_δ(ps, x, δ) = maximum(p -> p.inten, query_δ(ps, x, δ); init=0.0)
-
 date_mark(date=today()) = replace(string(date), "-"=>"")
 
 open_url(url) = begin
