@@ -38,9 +38,9 @@ include("Peaks.jl")
 include("MSs.jl")
 include("Formulas.jl")
 include("mass.jl")
-include("msx.jl")
-include("mgf.jl")
-include("fasta.jl")
+include("io/MSx.jl")
+include("io/MGF.jl")
+include("io/FASTA.jl")
 include("ion.jl")
 
 match_path(path, ext="") = begin
