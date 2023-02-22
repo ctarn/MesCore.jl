@@ -2,6 +2,9 @@ module MesCore
 
 fork(x::T; kwargs...) where T = T(values((; (n => getfield(x, n) for n in fieldnames(T))..., kwargs...))...)
 
+mapkey(f, D::Dict) = zip(f.(keys(D)), values(D)) |> Dict
+mapvalue(f, D::Dict) = zip(keys(D), f.(values(D))) |> Dict
+
 argquery(a, lower, upper) = searchsortedfirst(a, lower):searchsortedlast(a, upper)
 argquery_δ(a, x, δ) = argquery(a, x - δ, x + δ)
 argquery_ε(a, x, ε) = argquery_δ(a, x, ε * x)
