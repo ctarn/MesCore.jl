@@ -1,9 +1,7 @@
 abstract type AbstractMS end
 abstract type AbstractTandemMS <: AbstractMS end
 
-
 Base.isless(a::AbstractMS, b::AbstractMS) = a.id < b.id
-
 
 Base.@kwdef struct MS1 <: AbstractMS
     id::Int = 0
