@@ -35,6 +35,7 @@ log_softer(s=1) = x -> sign(x) * s * (log(abs(x) + s) - log(s))
 
 include("struct.jl")
 include("Ions.jl")
+include("Peaks.jl")
 include("Formulas.jl")
 include("mass.jl")
 include("msx.jl")

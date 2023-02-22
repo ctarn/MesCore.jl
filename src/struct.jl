@@ -1,17 +1,9 @@
-abstract type AbstractPeak end
 abstract type AbstractMS end
 abstract type AbstractTandemMS <: AbstractMS end
 
-Base.isless(a::AbstractPeak, b::AbstractPeak) = a.mz < b.mz
-Base.isless(peak::AbstractPeak, mz::Real) = peak.mz < mz
-Base.isless(mz::Real, peak::AbstractPeak) = mz < peak.mz
 
 Base.isless(a::AbstractMS, b::AbstractMS) = a.id < b.id
 
-struct Peak <: AbstractPeak
-    mz::Float64
-    inten::Float64
-end
 
 Base.@kwdef struct MS1 <: AbstractMS
     id::Int = 0
