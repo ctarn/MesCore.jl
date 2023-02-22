@@ -33,4 +33,4 @@ calc_centroid(xs, ws) = begin
     end
 end
 
-log_softer(s=1) = x -> sign(x) * s * (log(abs(x) + s) - log(s))
+log_softer(s=1) = x -> copysign(s * (log(abs(x) + s) - log(s)), x)
