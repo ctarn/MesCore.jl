@@ -42,7 +42,7 @@ Base.@kwdef struct MS2 <: AbstractTandemMS
     peaks::Vector{<:AbstractPeak} = Peak[]
 end
 
-index_by_id(M::AbstractArray{<:AbstractMS}) = Dict([m.id => m for m in M])
+dict_by_id(M::AbstractArray{<:AbstractMS}) = Dict([m.id => m for m in M])
 
 abstract type AbstractFormula end
 
