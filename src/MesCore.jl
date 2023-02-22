@@ -3,12 +3,12 @@ module MesCore
 fork(x::T; kwargs...) where T = T(values((; (n => getfield(x, n) for n in fieldnames(T))..., kwargs...))...)
 
 argquery(a, lower, upper) = searchsortedfirst(a, lower):searchsortedlast(a, upper)
-argquery_ε(a, x, ε) = searchsortedfirst(a, (1 - ε) * x):searchsortedlast(a, (1 + ε) * x)
-argquery_δ(a, x, δ) = searchsortedfirst(a, x - δ):searchsortedlast(a, x + δ)
+argquery_δ(a, x, δ) = argquery(a, x - δ, x + δ)
+argquery_ε(a, x, ε) = argquery_δ(a, x, ε * x)
 
 query(a, lower, upper) = a[argquery(a, lower, upper)]
-query_ε(a, x, ε) = a[argquery_ε(a, x, ε)]
-query_δ(a, x, δ) = a[argquery_δ(a, x, δ)]
+query_δ(a, x, δ) = query(a, x - δ, x + δ)
+query_ε(a, x, ε) = query_δ(a, x, ε * x)
 
 include("Ions.jl")
 include("Peaks.jl")
