@@ -10,12 +10,12 @@ query(a, lower, upper) = a[argquery(a, lower, upper)]
 query_δ(a, x, δ) = query(a, x - δ, x + δ)
 query_ε(a, x, ε) = query_δ(a, x, ε * x)
 
+include("Consts.jl")
 include("Ions.jl")
 include("Peaks.jl")
 include("MSs.jl")
 include("Formulas.jl")
 include("math.jl")
-include("mass.jl")
 include("peptide.jl")
 include("util.jl")
 include("io/MSx.jl")
