@@ -30,5 +30,5 @@ merge_peaks(peaks, ε) = begin
 end
 
 max_inten(ps, lower, upper) = maximum(p -> p.inten, query(ps, lower, upper); init=0.0)
-max_inten_ε(ps, x, ε) = maximum(p -> p.inten, query_ε(ps, x, ε); init=0.0)
-max_inten_δ(ps, x, δ) = maximum(p -> p.inten, query_δ(ps, x, δ); init=0.0)
+max_inten_δ(ps, x, δ) = max_inten(ps, x - δ, x + δ)
+max_inten_ε(ps, x, ε) = max_inten_δ(ps, x, ε * x)
