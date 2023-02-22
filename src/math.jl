@@ -15,8 +15,8 @@ mh_to_mz(mh, z) = begin
 end
 
 mz_to_mh(mz, z) = begin
-    if z > 0 return mz * z - mₚ * (z - 1) end
-    if z < 0 return mz * -z + mₚ * (-z - 1) end
+    if z > 0 return (mz - mₚ) * z + mₚ end
+    if z < 0 return (mz + mₚ) * -z - mₚ end
     return 0.0
 end
 
