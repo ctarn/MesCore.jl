@@ -9,23 +9,15 @@ m_to_mz(m, z) = (m + mₚ * z) / abs(z)
 mz_to_m(mz, z) = mz * abs(z) - mₚ * z
 
 mh_to_mz(mh, z) = begin
-    if z > 0
-        (mh + mₚ * (z - 1)) / z
-    elseif z < 0
-        (mh - mₚ * (-z - 1)) / -z
-    else
-        0.0
-    end
+    if z > 0 return (mh + mₚ * (z - 1)) / z end
+    if z < 0 return (mh - mₚ * (-z - 1)) / -z end
+    return 0.0
 end
 
 mz_to_mh(mz, z) = begin
-    if z > 0
-        mz * z - mₚ * (z - 1)
-    elseif z < 0
-        mz * -z + mₚ * (-z - 1)
-    else
-        0.0
-    end
+    if z > 0 return mz * z - mₚ * (z - 1) end
+    if z < 0 return mz * -z + mₚ * (-z - 1) end
+    return 0.0
 end
 
 calc_centroid(xs, ws) = begin
