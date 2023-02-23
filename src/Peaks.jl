@@ -32,3 +32,9 @@ end
 max_inten(ps, lower, upper) = maximum(p -> p.inten, query(ps, lower, upper); init=0.0)
 max_inten_δ(ps, x, δ) = max_inten(ps, x - δ, x + δ)
 max_inten_ε(ps, x, ε) = max_inten_δ(ps, x, ε * x)
+
+pick_by_inten(ps, n) = begin
+    if length(ps) <= n return ps end
+    τ = partialsort!(map(p -> p.inten, ps), n; rev=true)
+    return filter(p -> p.inten ≥ τ, ps)
+end
