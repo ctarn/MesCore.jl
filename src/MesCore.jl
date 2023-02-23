@@ -4,6 +4,8 @@ fork(x::T; kwargs...) where T = T(values((; (n => getfield(x, n) for n in fieldn
 
 mapkey(f, D::Dict) = zip(f.(keys(D)), values(D)) |> Dict
 mapvalue(f, D::Dict) = zip(keys(D), f.(values(D))) |> Dict
+mapkey(f) = Base.Fix1(mapkey, f)
+mapvalue(f) = Base.Fix1(mapvalue, f)
 
 argquery(a, lower, upper) = searchsortedfirst(a, lower):searchsortedlast(a, upper)
 argquery_δ(a, x, δ) = argquery(a, x - δ, x + δ)
