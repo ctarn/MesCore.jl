@@ -15,6 +15,19 @@ query(a, lower, upper) = a[argquery(a, lower, upper)]
 query_δ(a, x, δ) = query(a, x - δ, x + δ)
 query_ε(a, x, ε) = query_δ(a, x, ε * x)
 
+argquery_near(a, x) = begin
+    i = searchsortedfirst(a, x)
+    if i > lastindex(a)
+        return lastindex(a)
+    elseif i == firstindex(a)
+        return firstindex(a)
+    else
+        return i - (abs(a[i] - x) >= abs(a[i-1] - x))
+    end
+end
+
+query_near(a, x) = a[argquery_near(a, x)]
+
 include("Consts.jl")
 include("Ions.jl")
 include("Peaks.jl")
