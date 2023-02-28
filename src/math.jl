@@ -1,3 +1,5 @@
+using Statistics
+
 error_rel(a, b) = (b - a) / max(abs(a), abs(b))
 error_ppm(a, b) = error_rel(a, b) * 1e6
 error_ppb(a, b) = error_rel(a, b) * 1e9
@@ -21,15 +23,15 @@ mz_to_mh(mz, z) = begin
 end
 
 calc_centroid(xs, ws) = begin
-    if length(xs) > 1
-        ss = (ws[begin:end-1] .+ ws[begin+1:end]) .* (xs[begin+1:end] .- xs[begin:end-1])
-        s = sum(ss) / 2
-        x = sum(ss .* (xs[begin:end-1] .+ xs[begin+1:end])) / 4
-        return x / s, s / (xs[end] - xs[begin])
-    elseif length(xs) == 1
-        return xs[begin], ws[begin]
+    @assert length(xs) == length(ws) "`xs` and `ws` are not of the same length"
+    @assert !isempty(xs) "`xs` and `ws` are both empty"
+    if xs[begin] == xs[end]
+        return xs[begin], mean(ws)
     else
-        return zero(eltype(xs)), zero(eltype(ws))
+        ss2 = (ws[begin:end-1] .+ ws[begin+1:end]) .* (xs[begin+1:end] .- xs[begin:end-1])
+        s2 = sum(ss2)
+        x2 = sum(ss2 .* (xs[begin:end-1] .+ xs[begin+1:end])) / 2
+        return x2 / s2, s2 / 2 / (xs[end] - xs[begin])
     end
 end
 
